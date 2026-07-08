@@ -1,0 +1,6 @@
+@SistemaRh.api_HostAddress = http://localhost:5048
+
+GET {{SistemaRh.api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
