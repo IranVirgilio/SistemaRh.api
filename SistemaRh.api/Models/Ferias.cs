@@ -1,4 +1,6 @@
-﻿namespace SistemaRh.api.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SistemaRh.api.Models
 {  
     
     // lista com as opções de status exatas exigidas pelo pdf para evitar
@@ -11,6 +13,7 @@
     }
     public class Ferias
     {
+        [Key] //para o Entity Framework reconhecer a chave primaria
         public int IdFerias { get; set; }
         //Chave estrangeira que liga as férias ao dono dela.
         public int IdFuncionario { get; set; }

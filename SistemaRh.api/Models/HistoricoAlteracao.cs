@@ -1,7 +1,10 @@
-﻿namespace SistemaRh.api.Models
+﻿using System.ComponentModel.DataAnnotations;
+namespace SistemaRh.api.Models
 {
     public class HistoricoAlteracao
     {
+        [Key]
+        //para o Entity Framework reconhecer a chave primaria
         public int IdHistorico { get; set; }
 
         //chave estrangeira para identificar a qual funcionario o historico pertence

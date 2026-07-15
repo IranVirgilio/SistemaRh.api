@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using SistemaRh.api.Data;
 var builder = WebApplication.CreateBuilder(args);
+
+//Configuração do Banco na linha abaixo
+builder.Services.AddDbContext<AppDbContext>(Options => Options.UseSqlServer(builder.Configuration.GetConnectionString("ConexaoPadrao")));
 
 // Add services to the container.
 
