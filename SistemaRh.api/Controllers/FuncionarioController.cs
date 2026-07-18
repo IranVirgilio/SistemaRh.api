@@ -37,5 +37,15 @@ namespace SistemaRh.api.Controllers
             return Ok(novofuncionario);
         }
 
+        // Método de requisoções do tipo leitura
+        [HttpGet]
+        public async Task <ActionResult<IEnumerable<Funcionario>>> ListarTodos()
+        {
+            // O EF core vai no banco de e trás tudo para uma lista em memória
+            var listaFuncionario = await _context.Funcionario.ToListAsync();
+
+            // retona o status (ok) com a lista de funcionários no corpo da resposta
+            return Ok(listaFuncionario);
+        }
     }
 }

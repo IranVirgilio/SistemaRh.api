@@ -9,20 +9,17 @@ POST {{SistemaRh.api_HostAddress}}/api/funcionario
 Content-Type: application/json
 
 {
-  "nome": "Iran Virgilio dos Santos",
-  "cargo": "Desenvolvedor Pleno",
-  "dataAdmissao": "2026-02-02T10:00:00",
-  "salario": 4500.00,
+  "nome": "Douglas Silvestre",
+  "cargo": "Auxiliar Administrativo",
+  "dataAdmissao": "2025-08-23T07:39:55",
+  "salario": 2500.00,
   "ativo": true
 }
 
 ###
 
-POST {{SistemaRh.api_HostAddress}}/api/funcionario
-Content-Type: application/json
-
-{
-  //Funcionario
-}
-
+GET {{SistemaRh.api_HostAddress}}/api/funcionario
+Accept: application/json
 ###
+
+
