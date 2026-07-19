@@ -23,7 +23,7 @@ namespace SistemaRh.api.Controllers
         {
             _context = context;
         }
-        // Endpoint responde a requisições do tipo POST em api/funcionario
+        // Endpoint responde a requisições do tipo POST na url da api/funcionario
         [HttpPost]
         public async Task<ActionResult <Funcionario>> Cadastrar([FromBody] Funcionario novofuncionario)
         {
@@ -41,11 +41,55 @@ namespace SistemaRh.api.Controllers
         [HttpGet]
         public async Task <ActionResult<IEnumerable<Funcionario>>> ListarTodos()
         {
-            // O EF core vai no banco de e trás tudo para uma lista em memória
+            // O EF core vai no banco e trás tudo para uma lista em memória
             var listaFuncionario = await _context.Funcionario.ToListAsync();
 
             // retona o status (ok) com a lista de funcionários no corpo da resposta
             return Ok(listaFuncionario);
+        }
+
+        //Informa que este método atende requisiçõe PUT e exige o número do ID na url da api
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Funcionario>> Atualizar(int id, [FromBody] Funcionario dadosAtualizados)
+        {
+            // Verifica se o ID do funcionário requisitado existe no banco
+            var funcionarioNoBanco = await _context.Funcionario.FindAsync(id);
+
+            // Se não encontrar o funciónário com a ID solicitada informa a mensagem de erro
+            if (funcionarioNoBanco == null)
+            {
+                return NotFound("Funcionário não encontrado no bando de dados");
+            }
+
+            // Atualiza os campos alterados no banco de dados
+            funcionarioNoBanco.Nome = dadosAtualizados.Nome;
+            funcionarioNoBanco.Cargo = dadosAtualizados.Cargo;
+            funcionarioNoBanco.Salario = dadosAtualizados.Salario;
+            funcionarioNoBanco.Ativo = dadosAtualizados.Ativo;
+
+            // O EF detecta o que mudou e gera o comando UPDATE no SQL Server
+            await _context.SaveChangesAsync();
+
+            // Devolve o status 200 (ok) e mostra o funcionário atualizado
+            return Ok(funcionarioNoBanco);
+
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Deletar(int id)
+        {
+            var funcionarioNoBanco = await _context.Funcionario.FindAsync(id);
+
+            if (funcionarioNoBanco == null)
+            {
+                return NotFound("Funcionário não encntrado no banco para exclusão");
+            }
+
+            _context.Funcionario.Remove(funcionarioNoBanco);
+
+            await _context.SaveChangesAsync();
+
+            return Ok("Funcionário excluído do sistema com Sucesso!");
         }
     }
 }
