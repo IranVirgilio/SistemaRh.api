@@ -57,3 +57,17 @@ Content-Type: application/json
 DELETE {{SistemaRh.api_HostAddress}}/api/funcionario/6
 
 ###
+
+POST {{SistemaRh.api_HostAddress}}/api/funcionario
+Content-Type: application/json
+
+{
+  
+  "nome": "X",
+  "cargo": "",
+  "dataAdmissao": "2026-02-02T10:00:00",
+  "salario": -150.00,
+  "ativo": true
+}
+
+###
